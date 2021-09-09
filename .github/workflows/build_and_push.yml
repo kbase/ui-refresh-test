@@ -1,0 +1,58 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Build and Push to static-content
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    env:
+      REPO_NAME: ${{ github.event.repository.name }}
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.GH_PAT }}
+          path: source
+        
+      - name: Checkout Target Repo
+        uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.GH_PAT }}
+          repository: dauglyon/static-content
+          path: target
+
+      - name: Run build
+        run: | 
+          cd source
+          npm run build
+          cd ..
+          
+      - name: Copy Source->Target
+        run: |
+          rm -r target/$REPO_NAME/
+          cp -r source/build/ target/$REPO_NAME
+          
+      - name: Commit and Push
+        run: |
+          cd target
+          git add --all $REPO_NAME/
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git commit -m "$REPO_NAME content changed"
+          git push
+      
+ 
+        
