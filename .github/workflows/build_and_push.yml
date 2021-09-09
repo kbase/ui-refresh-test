@@ -24,14 +24,13 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v2
         with:
-          token: ${{ secrets.GH_PAT }}
           path: source
         
       - name: Checkout Target Repo
         uses: actions/checkout@v2
         with:
-          token: ${{ secrets.GH_PAT }}
           repository: dauglyon/static-content
+          token: ${{ secrets.GH_PAT }}
           path: target
 
       - name: Run build
