@@ -27,13 +27,13 @@ jobs:
           path: source
           
       - run: |
-          echo ${{ secrets.GH_PAT }}
+          echo ${{ secrets.PAT_FOR_PUSH }}
         
       - name: Checkout Target Repo
         uses: actions/checkout@v2
         with:
           repository: dauglyon/static-content
-          token: ${{ secrets.GH_PAT }}
+          token: ${{ secrets.PAT_FOR_PUSH }}
           path: target
 
       - name: Run build
