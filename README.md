@@ -10,6 +10,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - `.nvmrc` specifying the node version
 - Very small example app implementation with mock login
 - `.editorconfig` for cross-editor config defaults. See [editorconfig.org](https://editorconfig.org) for compatability
+- Storybook (`npm run storybook`) for dev docs, stlye examples, and component examples.
 
 ## Available Scripts
 
@@ -41,6 +42,10 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 ### `npm run lint`, `npm run lint:fix`, `npm run lint:strict`
 
 Runs eslint/prettier and shows errors/warnings. `npm run lint:fix` will fix files in-place where possible. `npm run lint:strict` will fail with any errors/warnings and is used as a pre-commit hook.
+
+## `npm run storybook`
+
+Opens storybook locally. Builds and watches `*.stories.[tsx|mdx]` files and launches a local storybook server. The storybook contains component examples and other dev documentation.
 
 ### `npm run eject`
 
