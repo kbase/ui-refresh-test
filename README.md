@@ -10,7 +10,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - `.nvmrc` specifying the node version
 - Very small example app implementation with mock login
 - `.editorconfig` for cross-editor config defaults. See [editorconfig.org](https://editorconfig.org) for compatability
-- Storybook (`npm run storybook`) for dev docs, stlye examples, and component examples.
+- Storybook (`npm run storybook`) for dev docs, style examples, and component examples.
 
 ## Available Scripts
 
