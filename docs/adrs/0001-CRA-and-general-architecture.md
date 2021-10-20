@@ -29,8 +29,8 @@ Using CRA allows fast initial setup, but adds some "magic" to the repo. We felt 
 ### Create React App (CRA)
 - `+` Fast and easy setup
 - `+` Large dev community, with existing tools and documentation
-- `-` Low flexibility (if we run into a unique react issue we need to solve, we may need to `eject`[^1])
 - `+` Low flexibility (allows us to focus more on development over bikeshedding)
+- `-` Low flexibility (if we run into a unique react issue we need to solve, we may need to `eject`[^1])
 
 ### Manual React Setup
 - `+` Almost completely customizable
