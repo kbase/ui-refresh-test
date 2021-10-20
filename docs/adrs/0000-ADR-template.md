@@ -38,8 +38,8 @@ Adds a file to the repo, but allows easy discovery. Makes updating the template 
 - `-` Silly
 
 ### Send an email describing how to make an ADR to everyone
-- `-` Not particulary discoverable
 - `+` May work better if there are many repos related to the project
+- `-` Not particulary discoverable
 
 ## References <!-- List any relevant resources about the ADR, consider using footnotes as below where useful -->
 - [Why Write ADRs](https://github.blog/2020-08-13-why-write-adrs/)
