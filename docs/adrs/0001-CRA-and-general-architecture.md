@@ -8,7 +8,7 @@
 The new UI refresh needed basic decisions around infrastructure. Typescript/React was the framework desired. State management was also discussed; Redux was chosen due to it's focus on app-level state, and it's popularity. This ADR covers the architectural decisions made to support those frameworks.
 
 ## Authors <!-- GitHub Username(s) -->
-@dauglyon
+[@dauglyon](https://github.com/dauglyon)
 
 ## Status <!-- Status of this ADR -->
 Accepted
