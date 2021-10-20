@@ -22,7 +22,7 @@ Accepted
 Create React App (CRA) was chosen to bootstrap the repo. The typescript template will be used, and redux added post-hoc.
 
 ## Consequences <!-- Summary of the decision -->
-Using CRA allows fast initial setup, but adds some "magic" to the repo. We felt this was a good tradeoff for initial development. CRA also offers `eject`[^1] which allows for it to be removed as a dependancy (though doing so also removes many of it's benefits, such as not maintaining the webpack config). There is also a large dev community for CRA. 
+Using CRA allows fast initial setup, but adds some "magic" to the repo. We felt this was a good tradeoff for initial development. CRA also offers `eject`[^1] which allows for it to be removed as a dependency (though doing so also removes many of it's benefits, such as not maintaining the webpack config). There is also a large dev community for CRA. 
 
 ## Pros and Cons of the Alternatives <!-- List Pros/Cons of each considered alternative -->
 
