@@ -5,19 +5,23 @@ import App from './App';
 import { Provider } from 'react-redux';
 import { store } from './store';
 
-test('renders login page link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/Login/i);
-  expect(linkElement).toBeInTheDocument();
-});
-
-test('login page link works', () => {
+test('renders Auth page link', () => {
   render(
     <Provider store={store}>
       <App />
     </Provider>
   );
-  const linkElement = screen.getByText(/Login/i);
+  const linkElement = screen.getByText(/Auth/i);
+  expect(linkElement).toBeInTheDocument();
+});
+
+test('Auth page link works', () => {
+  render(
+    <Provider store={store}>
+      <App />
+    </Provider>
+  );
+  const linkElement = screen.getByText(/Auth/i);
   linkElement.click();
   const LoginStatusText = screen.getByText(/You are not logged in/i);
   expect(LoginStatusText).toBeInTheDocument();
