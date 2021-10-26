@@ -1,6 +1,6 @@
 name: PR Checks
 
-on: 
+on:
   pull_request:
   workflow_dispatch:
 
@@ -8,13 +8,19 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
       - uses: actions/checkout@v2
       - run: npm install
       - run: npm run test
-      
+
   lint:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
       - uses: actions/checkout@v2
       - run: npm install
       - run: npm run lint:strict

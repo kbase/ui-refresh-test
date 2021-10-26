@@ -20,10 +20,15 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Checkout Repo
         uses: actions/checkout@v2
-          
+
+      - name: Install proper Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
       - name: Run build
         run: npm install && npm run build
-        
+
       - name: Push to repository
         uses: cpina/github-action-push-to-another-repository@main
         env:
