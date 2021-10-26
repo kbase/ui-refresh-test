@@ -23,33 +23,20 @@
     "typescript": "^4.3.5",
     "web-vitals": "^1.1.2"
   },
+  "engines": {
+    "node": ">=16.13.0"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "lint": "eslint .",
-    "lint:strict": "eslint . --max-warnings=0",
-    "lint:fix": "eslint . --fix",
+    "lint": "./scripts/lint.sh",
+    "lint:fix": "./scripts/lint.fix.sh",
+    "lint:strict": "./scripts/lint.strict.sh",
     "eject": "react-scripts eject",
     "prepare": "husky install",
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ],
-    "overrides": [
-      {
-        "files": [
-          "**/*.stories.*"
-        ],
-        "rules": {
-          "import/no-anonymous-default-export": "off"
-        }
-      }
-    ]
   },
   "browserslist": {
     "production": [
@@ -74,6 +61,31 @@
     "@typescript-eslint/parser": "^4.28.5",
     "eslint-plugin-prettier": "^3.4.0",
     "husky": "^7.0.1",
-    "prettier": "^2.3.2"
+    "prettier": "^2.3.2",
+    "remark-cli": "^10.0.0",
+    "remark-lint": "^9.1.0",
+    "remark-lint-maximum-line-length": "^3.1.1",
+    "remark-lint-no-missing-blank-lines": "^3.1.0",
+    "remark-lint-no-undefined-references": "^4.1.0",
+    "remark-preset-lint-recommended": "^6.1.1",
+    "stylelint": "^13.13.1",
+    "stylelint-config-sass-guidelines": "^8.0.0",
+    "stylelint-config-standard": "^22.0.0"
+  },
+  "remarkConfig": {
+    "plugins": {
+      "remark-preset-lint-recommended": {
+        "note": "this plugin must be first"
+      },
+      "lint": {},
+      "lint-list-item-indent": "mixed",
+      "lint-maximum-line-length": 80,
+      "lint-no-missing-blank-lines": true,
+      "lint-no-undefined-references": {
+        "allow": [
+          "^1"
+        ]
+      }
+    }
   }
 }

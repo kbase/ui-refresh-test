@@ -1,16 +1,28 @@
 {
-  "root": true,
-  "parser": "@typescript-eslint/parser",
   "extends": [
-    "react-app",
     "eslint:recommended",
+    "react-app",
     "plugin:@typescript-eslint/recommended"
   ],
-  "plugins": [
-    "@typescript-eslint",
-    "prettier"
+  "ignorePatterns": ["package-lock.json", "!.stylelintrc.json", "*.mdx"],
+  "overrides": [
+    {
+      "files": ["package.json"],
+      "rules": {
+        "no-unused-expressions": ["off"],
+        "max-len": ["error", { "code": 100 }]
+      }
+    },
+    {
+      "files": ["*.json"],
+      "rules": { "no-unused-expressions": ["off"] }
+    }
   ],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint", "prettier"],
+  "root": true,
   "rules": {
+    "max-len": ["error", { "code": 80 }],
     "prettier/prettier": "warn",
     "no-console": "warn",
     "@typescript-eslint/explicit-module-boundary-types": "off",
