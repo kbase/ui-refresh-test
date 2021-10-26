@@ -1,7 +1,16 @@
 {
-  "name": "ui-refresh-test",
-  "version": "0.1.0",
-  "private": true,
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
@@ -22,33 +31,6 @@
     "react-scripts": "4.0.3",
     "typescript": "^4.3.5",
     "web-vitals": "^1.1.2"
-  },
-  "engines": {
-    "node": ">=16.13.0"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "lint": "./scripts/lint.sh",
-    "lint:fix": "./scripts/lint.fix.sh",
-    "lint:strict": "./scripts/lint.strict.sh",
-    "eject": "react-scripts eject",
-    "prepare": "husky install",
-    "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -s public"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
   },
   "devDependencies": {
     "@storybook/addon-actions": "^6.3.12",
@@ -72,6 +54,11 @@
     "stylelint-config-sass-guidelines": "^8.0.0",
     "stylelint-config-standard": "^22.0.0"
   },
+  "engines": {
+    "node": ">=16.13.0"
+  },
+  "name": "ui-refresh-test",
+  "private": true,
   "remarkConfig": {
     "plugins": {
       "remark-preset-lint-recommended": {
@@ -87,5 +74,18 @@
         ]
       }
     }
-  }
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "lint": "./scripts/lint.sh",
+    "lint:fix": "./scripts/lint.fix.sh",
+    "lint:strict": "./scripts/lint.strict.sh",
+    "eject": "react-scripts eject",
+    "prepare": "husky install",
+    "storybook": "start-storybook -p 6006 -s public",
+    "build-storybook": "build-storybook -s public"
+  },
+  "version": "0.1.0"
 }
