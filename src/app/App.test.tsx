@@ -3,11 +3,11 @@ import { render, screen } from '@testing-library/react';
 import App from './App';
 
 import { Provider } from 'react-redux';
-import { store } from './store';
+import { createTestStore } from './store';
 
 test('renders Auth page link', () => {
   render(
-    <Provider store={store}>
+    <Provider store={createTestStore()}>
       <App />
     </Provider>
   );
@@ -17,7 +17,7 @@ test('renders Auth page link', () => {
 
 test('Auth page link works', () => {
   render(
-    <Provider store={store}>
+    <Provider store={createTestStore()}>
       <App />
     </Provider>
   );
