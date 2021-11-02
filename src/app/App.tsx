@@ -25,7 +25,7 @@ export default function App() {
   }, [token]);
 
   return (
-    <Router>
+    <Router basename={process.env.PUBLIC_URL}>
       <div className={classes.container}>
         <div className={classes.left_navbar}>
           <LeftNavBar />
