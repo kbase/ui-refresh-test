@@ -28,7 +28,7 @@ jobs:
 
       - name: Run build
         env:
-          PUBLIC_URL: 'https://next-dev.kbase.us/services/static'
+          PUBLIC_URL: '/services/static'
           REACT_APP_AUTH_SERIVCE_URL: 'https://next-dev.kbase.us/services/auth'
         run: npm install && npm run build
 
