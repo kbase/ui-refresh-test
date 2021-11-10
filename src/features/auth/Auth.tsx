@@ -1,14 +1,18 @@
 import { useState } from 'react';
-import { useAppSelector, useAppDispatch } from '../../common/hooks';
+import {
+  useAppSelector,
+  useAppDispatch,
+  usePageTitle,
+} from '../../common/hooks';
 import { authFromToken, revokeCurrentToken } from './authSlice';
 
 export default function Auth() {
+  usePageTitle('Authentication');
   const { username, token, error, pending } = useAppSelector(
     (state) => state.auth
   );
   return (
     <div>
-      <h2>Auth</h2>
       <p>
         {token ? `You are logged in as '${username}'` : `You are not logged in`}
       </p>

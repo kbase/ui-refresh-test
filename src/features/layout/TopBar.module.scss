@@ -1,0 +1,67 @@
+@import '../../common/colors.scss';
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: stretch;
+  border-bottom: 5px solid #e0e0e0;
+  height: 100%;
+  position: relative;
+  .topbar_item {
+    height: auto;
+    vertical-align: middle;
+    flex-grow: 0;
+    flex-shrink: 0;
+    position: relative;
+    &.stretch {
+      flex-grow: 1;
+      flex-shrink: 1;
+      overflow: hidden;
+    }
+  }
+}
+
+.hamburger_menu {
+  font-size: 24px;
+  width: 53px;
+  text-align: center;
+  height: 100%;
+  vertical-align: middle;
+  color: use_color('mid-blue');
+}
+
+.page_title {
+  padding-left: 10px;
+  font-size: 2rem;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-weight: bold;
+  color: use_color('black');
+}
+
+.environment {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  padding: 0 12px 0 5px;
+  &>svg {
+    font-size: 2rem;
+    color: use_color('mid-blue');
+  }
+}
+
+.login_menu {
+  height:100%;
+  width: 77px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  svg:first-of-type {
+    font-size: 2rem;
+    color: use_color('mid-blue');
+    margin-right: 0.5em;
+  }
+}

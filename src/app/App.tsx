@@ -4,14 +4,16 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { useAppDispatch } from '../common/hooks';
 import { useEffect } from 'react';
 import { authFromToken } from '../features/auth/authSlice';
+import { setEnvironment } from '../features/layout/layoutSlice';
 import { getCookie } from '../common/cookie';
 
-import LeftNavBar from '../common/nav/LeftNavBar';
-import PageNotFound from '../common/nav/PageNotFound';
+import LeftNavBar from '../features/layout/LeftNavBar';
+import PageNotFound from '../features/layout/PageNotFound';
 
 import Navigator from '../features/navigator/Navigator';
 import Count from '../features/count/Counter';
 import Auth from '../features/auth/Auth';
+import TopBar from '../features/layout/TopBar';
 
 export default function App() {
   const dispatch = useAppDispatch();
@@ -20,13 +22,19 @@ export default function App() {
   const token = getCookie('kbase_session');
   useEffect(() => {
     if (token) dispatch(authFromToken(token));
-    // OK to ignore dispatch as dependency here
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [token]);
+  }, [dispatch, token]);
+
+  // Placeholder code for determining environment.
+  useEffect(() => {
+    dispatch(setEnvironment('ci'));
+  }, [dispatch]);
 
   return (
     <Router>
       <div className={classes.container}>
+        <div className={classes.topbar}>
+          <TopBar />
+        </div>
         <div className={classes.left_navbar}>
           <LeftNavBar />
         </div>

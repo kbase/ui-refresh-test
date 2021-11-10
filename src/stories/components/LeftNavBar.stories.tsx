@@ -1,7 +1,6 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { BrowserRouter as Router } from 'react-router-dom';
 
-import LeftNavBar from '../../common/nav/LeftNavBar';
+import LeftNavBar from '../../features/layout/LeftNavBar';
 
 export default {
   title: 'Components/LeftNavBar',
@@ -12,11 +11,9 @@ export default {
 // controls (args) these can be used to dynamically change the props of the
 // component e.g. `<Component {...args} />`
 const LeftNavBarTemplate: ComponentStory<typeof LeftNavBar> = (args) => (
-  <Router>
-    <div style={{ width: '75px', position: 'relative' }}>
-      <LeftNavBar />
-    </div>
-  </Router>
+  <div style={{ width: '75px', position: 'relative' }}>
+    <LeftNavBar />
+  </div>
 );
 
 // Each story for the component can then reuse the template, setting props with

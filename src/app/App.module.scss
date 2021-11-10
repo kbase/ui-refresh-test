@@ -3,9 +3,10 @@
   width: 100vw;
   position: relative;
   display: flex;
-  flex-flow: row nowrap;
+  flex-flow: row wrap;
   justify-content: flex-start;
   align-items: stretch;
+  align-content: flex-start;
 
   .left_navbar {
     width: 75px;
@@ -19,6 +20,15 @@
     flex-grow: 1;
     flex-shrink: 1;
     background-color: transparent;
+    position: relative;
+  }
+
+  .topbar {
+    flex-grow: 0;
+    flex-shrink: 0;
+    width: 100%;
+    height: 70px;
+    background-color: white;
     position: relative;
   }
 }

@@ -1,4 +1,7 @@
 import "../src/index.scss";
+import { Provider } from 'react-redux';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { createTestStore } from '../src/app/store';
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
@@ -9,3 +12,13 @@ export const parameters = {
     },
   },
 }
+
+export const decorators = [
+  (Story) => (
+    <Provider store={createTestStore()}>
+      <Router>
+        <Story />
+      </Router>
+    </Provider>
+  ),
+];

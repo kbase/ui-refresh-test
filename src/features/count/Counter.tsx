@@ -1,4 +1,8 @@
-import { useAppSelector, useAppDispatch } from '../../common/hooks';
+import {
+  useAppSelector,
+  useAppDispatch,
+  usePageTitle,
+} from '../../common/hooks';
 import { countStatus, increment } from '../count/countSlice';
 
 const Counter = () => {
@@ -7,6 +11,7 @@ const Counter = () => {
 };
 
 export default function Count() {
+  usePageTitle('Count');
   const dispatch = useAppDispatch();
   const doIncrement = () => {
     dispatch(increment());
