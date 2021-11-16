@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { KBaseButton } from '../../common/components';
 import {
   useAppSelector,
   useAppDispatch,
@@ -40,7 +41,7 @@ const AuthForm = () => {
         value={token ?? ''}
         onChange={(e) => setToken(e.target.value)}
       />
-      <button onClick={doLogin}>Login</button>
+      <KBaseButton onclick={doLogin}>Login</KBaseButton>
     </div>
   );
 };
@@ -49,9 +50,9 @@ const LogoutForm = () => {
   const dispatch = useAppDispatch();
   return (
     <div>
-      <button onClick={() => dispatch(revokeCurrentToken())}>
+      <KBaseButton onclick={() => dispatch(revokeCurrentToken())}>
         Logout of KBase
-      </button>
+      </KBaseButton>
     </div>
   );
 };
