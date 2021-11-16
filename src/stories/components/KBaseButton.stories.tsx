@@ -8,13 +8,13 @@ export default {
   component: KBaseButton,
 } as ComponentMeta<typeof KBaseButton>;
 
-const randomBackground = (evt: MouseEvent) => {
+const randomBackground = (evt: MouseEvent<HTMLButtonElement>) => {
   console.log('Clicked!', evt); // eslint-disable-line no-console
   const randomCent = () => Math.round(100 * Math.random());
   const rr = randomCent();
   const rb = randomCent();
   const rg = randomCent();
-  (evt.target as HTMLElement).style.setProperty(
+  evt.currentTarget.style.setProperty(
     'background-color',
     `rgb(${rr}, ${rb}, ${rg})`
   );

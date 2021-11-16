@@ -1,4 +1,5 @@
 import { FunctionComponent as FC, MouseEventHandler } from 'react';
+import classes from './KBaseButton.module.scss';
 
 interface KBaseComponentProps {
   disabled?: boolean;
@@ -11,7 +12,7 @@ export const KBaseButton: FC<KBaseComponentProps> = ({
   onclick,
 }) => {
   return (
-    <button onClick={onclick} disabled={disabled}>
+    <button className={classes.button} onClick={onclick} disabled={disabled}>
       {children}
     </button>
   );
