@@ -1,21 +1,21 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { KBaseButton } from './KBaseButton';
+import { Button } from './Button';
 
-test('renders KBaseButton', () => {
-  const onclickSpy = jest.fn();
+test('renders Button', () => {
+  const onClickSpy = jest.fn();
   render(
     <ul>
       <li>
-        <KBaseButton onclick={onclickSpy}>A clickable button</KBaseButton>
+        <Button onClick={onClickSpy}>A clickable button</Button>
       </li>
       <li>
-        <KBaseButton disabled={true}>A disabled button</KBaseButton>
+        <Button disabled={true}>A disabled button</Button>
       </li>
       <li>
-        <KBaseButton disabled={true} onclick={onclickSpy}>
+        <Button disabled={true} onClick={onClickSpy}>
           Another button
-        </KBaseButton>
+        </Button>
       </li>
     </ul>
   );
@@ -29,5 +29,5 @@ test('renders KBaseButton', () => {
   const another = screen.getByText(/another/i);
   expect(another).toBeInTheDocument();
   another.click();
-  expect(onclickSpy).toHaveBeenCalledTimes(1);
+  expect(onClickSpy).toHaveBeenCalledTimes(1);
 });

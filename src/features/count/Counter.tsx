@@ -1,4 +1,4 @@
-import { KBaseButton } from '../../common/components';
+import { Button } from '../../common/components';
 import {
   useAppSelector,
   useAppDispatch,
@@ -22,7 +22,7 @@ export default function Count() {
       <h2>
         The count is: <Counter />
       </h2>
-      <KBaseButton onclick={() => doIncrement()}>Add</KBaseButton>
+      <Button onClick={() => doIncrement()}>Add</Button>
     </section>
   );
 }

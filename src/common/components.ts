@@ -1,1 +1,1 @@
-export * from './KBaseButton';
+export * from './Button';

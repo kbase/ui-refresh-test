@@ -1,0 +1,13 @@
+@import "colors";
+
+.button {
+  /*button styles*/
+  border-color: use_color("black");
+
+  &[disabled] {
+    /*disabled button styles*/
+    background-color: use_color("neutral");
+    border-color: use_color("neutral");
+    color: use_color("silver");
+  }
+}
