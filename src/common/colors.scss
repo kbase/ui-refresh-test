@@ -127,43 +127,43 @@ $kbase-palette: (
 );
 
 $icons: (
-  // specialised use cases
-  "icon-app": map-get($kbase-palette, 'purple'),
-  "icon-generic": map-get($kbase-palette, 'silver'),
-  "icon-type": map-get($kbase-palette, 'black'),
+
+  "icon-app": map-get($kbase-palette, "purple"),
+  "icon-generic": map-get($kbase-palette, "silver"),
+  "icon-type": map-get($kbase-palette, "black"),
 );
 
 $kbase-palette: map-merge($kbase-palette, $icons);
 
 // Job status colors
-$job_status_colors: (
-  "created": map-get($kbase-palette, 'info'),
-  "estimating": map-get($kbase-palette, 'info'),
-  "queued": map-get($kbase-palette, 'info'),
-  "running": map-get($kbase-palette, 'info'),
-  "completed": map-get($kbase-palette, 'success-dark'),
-  "terminated": map-get($kbase-palette, 'warning-dark'),
-  // error already exists, but we need it in our job status list
-  "error": map-get($kbase-palette, 'error'),
-  "does_not_exist": map-get($kbase-palette, 'error'),
+$job-status-colors: (
+  "created": map-get($kbase-palette, "info"),
+  "estimating": map-get($kbase-palette, "info"),
+  "queued": map-get($kbase-palette, "info"),
+  "running": map-get($kbase-palette, "info"),
+  "completed": map-get($kbase-palette, "success-dark"),
+  "terminated": map-get($kbase-palette, "warning-dark"),
+
+  "error": map-get($kbase-palette, "error"),
+  "does_not_exist": map-get($kbase-palette, "error"),
 );
 
 $palette: map-merge($kbase-palette, $job_status_colors);
 
 // use a color from the palettes above
-@function use_color($key) {
+@function use-color($key) {
   @if map-has-key($kbase-palette, $key) {
     @return map-get($kbase-palette, $key);
   }
 
   @if not map-has-key($palette, $key) {
-    @warn 'Key `#{$key}` not found in $palette map.';
+    @warn "Key `#{$key}` not found in $palette map.";
   }
 
   @return map-get($palette, $key);
 }
 
 // use a color from the palettes above with the specified opacity
-@function use_rgba_color($key, $opacity) {
-  @return rgba(use_color($key), $opacity);
+@function use-rgba-color($key, $opacity) {
+  @return rgba(use-color($key), $opacity);
 }

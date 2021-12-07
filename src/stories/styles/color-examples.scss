@@ -1,32 +1,36 @@
-@import '../../common/colors.scss';
+@import "../../common/colors";
 
 @each $colorname, $_ in $palette {
   .example--#{$colorname} {
+    background-color: use-color($colorname);
+    border: 1px solid use-color("white");
     display: block;
     float: left;
-    background-color: use_color($colorname);
-    width: 150px;
-    height: 150px;
-    padding: 10px;
-    overflow: hidden;
-    border: 1px solid white;
     font-weight: bold;
+    height: 150px;
+    overflow: hidden;
+    padding: 10px;
     white-space: pre;
-    @if (lightness(use_color($colorname)) > 33) {
-      color: black;
+    width: 150px;
+    @if (lightness(use-color($colorname)) > 33) {
+      color: use-color("black");
     } @else {
-      color: white;
+      color: use-color("white");
     }
-    &::before, &::after {
-      content: '';
+
+    &::before,
+    &::after {
+      content: "";
       display: inline;
       font-weight: normal;
     }
+
     &::before {
       content: "'";
     }
+
     &::after {
-      content: "'\a#{use_color($colorname)}";
+      content: "'\a#{use-color($colorname)}";
     }
   }
 }

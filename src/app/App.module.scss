@@ -1,34 +1,36 @@
+@import "../common/colors";
+
 .container {
-  height: 100vh;
-  width: 100vw;
-  position: relative;
+  align-content: flex-start;
+  align-items: stretch;
   display: flex;
   flex-flow: row wrap;
+  height: 100vh;
   justify-content: flex-start;
-  align-items: stretch;
-  align-content: flex-start;
+  position: relative;
+  width: 100vw;
 
   .left_navbar {
-    width: 75px;
+    background-color: use-color("white");
     flex-grow: 0;
     flex-shrink: 0;
-    background-color: white;
     position: relative;
+    width: 75px;
   }
 
   .page_content {
+    background-color: transparent;
     flex-grow: 1;
     flex-shrink: 1;
-    background-color: transparent;
     position: relative;
   }
 
   .topbar {
+    background-color: use-color("white");
     flex-grow: 0;
     flex-shrink: 0;
-    width: 100%;
     height: 70px;
-    background-color: white;
     position: relative;
+    width: 100%;
   }
 }

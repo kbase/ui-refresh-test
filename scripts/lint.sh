@@ -4,5 +4,5 @@ set -e
 set -x
 
 eslint .
-stylelint **/*.scss
+stylelint '**/*.scss'
 remark . --ext '.md,.mdx'

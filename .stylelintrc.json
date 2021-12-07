@@ -1,6 +1,14 @@
 {
   "extends": "stylelint-config-sass-guidelines",
   "rules": {
+    "max-nesting-depth": 2,
+    "selector-class-pattern": [
+      "^[a-z0-9\\-_]+$",
+      {
+        "message": "Selector regex: ^[a-z0-9\\-_]+$ (selector-class-pattern)"
+      }
+    ],
+    "selector-no-qualifying-type": [true, { "ignore": ["class"] }],
     "string-quotes": "double"
   }
 }
