@@ -42,3 +42,6 @@ jobs:
           destination-repository-name: 'static-content'
           user-email: 'sysadmins@lists.kbase.us'
           target-branch: main
+          
+      - name: Call Static Server to Depoly Update
+        run: curl -XGET 'https://ci.kbase.us/services/static-server'
