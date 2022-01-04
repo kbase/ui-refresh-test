@@ -1,0 +1,24 @@
+@import "../colors";
+
+.button {
+  /*button styles*/
+  border-color: use_color("black");
+
+  &[disabled] {
+    /*disabled button styles*/
+    background-color: use_color("neutral");
+    border-color: use_color("neutral");
+    color: use_color("silver");
+  }
+}
+
+@each $state, $_ in $palette {
+  .button--#{$state} {
+    background-color: use-color($state);
+    @if (lightness(use-color($state)) > 33) {
+      color: use-color("black");
+    } @else {
+      color: use-color("white");
+    }
+  }
+}
