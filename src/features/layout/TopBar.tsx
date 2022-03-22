@@ -93,9 +93,7 @@ const LoginMenu: FC = () => {
           },
         ]}
         onChange={(opt) => {
-          if (opt && 'value' in opt) {
-            history.push(opt?.value);
-          }
+          if (opt?.[0]) history.push(opt[0].value);
         }}
       >
         <div className={classes.login_menu_button}>
@@ -166,9 +164,7 @@ const HamburgerMenu: FC = () => {
           },
         ]}
         onChange={(opt) => {
-          if (opt && 'value' in opt && opt.value) {
-            window.location.href = opt.value;
-          }
+          if (opt?.[0]) window.location.href = opt[0].value;
         }}
       >
         <FAIcon className={classes.hamburger_menu_icon} icon={faBars} />
