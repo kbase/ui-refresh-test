@@ -23,8 +23,8 @@
   "root": true,
   "rules": {
     "max-len": ["error", { "code": 80 }],
-    "prettier/prettier": "error",
-    "no-console": "error",
+    "prettier/prettier": "warn",
+    "no-console": "warn",
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/ban-types": "off"
   }
