@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-const AUTH_SERVICE = process.env.REACT_APP_AUTH_SERIVCE_URL;
+const AUTH_SERVICE = process.env.REACT_APP_AUTH_SERVICE_URL;
 
 interface TokenInfo {
   created: number;
