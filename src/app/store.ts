@@ -4,11 +4,12 @@ import count from '../features/count/countSlice';
 import icons from '../common/slices/iconSlice';
 import layout from '../features/layout/layoutSlice';
 import profile from '../features/profile/profileSlice';
+import navigator from '../features/navigator/navigatorSlice';
 
 const createStore = () => {
   const config = {
     devTools: true,
-    reducer: { auth, count, icons, layout, profile },
+    reducer: { auth, count, icons, layout, profile, navigator },
   };
   return configureStore(config);
 };
