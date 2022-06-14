@@ -1,0 +1,42 @@
+.preview_loading {
+  color: rgba(0, 0, 0, 0.5);
+  text-align: center;
+  width: 100%;
+
+  p {
+    padding-top: 4rem;
+  }
+
+  &.loading_wheel {
+    margin-right: 0.5rem;
+  }
+}
+
+.error {
+  padding-top: 1rem;
+}
+
+.full_narrative_link {
+  text-decoration: none;
+}
+
+.preview_cell_container_outer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  padding-bottom: 1rem;
+  padding-top: 1rem;
+
+  &.preview_cell_container_inner {
+    margin-left: 2rem;
+  }
+
+  &.preview_cell_subtitle {
+    color: rgba(0, 0, 0, 0.8);
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    overflow: hidden;
+    text-overflow: ellispsis;
+    white-space: nowrap;
+  }
+}

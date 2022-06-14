@@ -38,7 +38,7 @@ const Preview: FC<PreviewProps> = ({ narrative }) => {
   if (loading) {
     return (
       <div className={classes.preview_loading}>
-        <p className="pv5">
+        <p>
           <FAIcon icon={faCog} className={classes.loading_wheel} spin />
           loading...
         </p>
