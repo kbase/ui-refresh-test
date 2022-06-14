@@ -28,5 +28,5 @@ export interface NarrativeCell {
 // corresponds to worspace.get_objects2 result.
 // currently only use the data field but there are other fields which can be added as needed
 export interface WorkspaceObject {
-  data: { cells?: NarrativeCell };
+  cells?: NarrativeCell[];
 }
