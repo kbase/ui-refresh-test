@@ -18,6 +18,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
     "@fortawesome/react-fontawesome": "^0.1.18",
     "@kbase/narrative-utils": "^0.0.6",
+    "@redux-devtools/extension": "^3.2.2",
     "@reduxjs/toolkit": "^1.6.1",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
@@ -26,6 +27,7 @@
     "@types/node": "^12.20.17",
     "@types/react": "^17.0.15",
     "@types/react-dom": "^17.0.9",
+    "jest-fetch-mock": "^3.0.3",
     "node-sass": "^6.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -61,6 +63,9 @@
   },
   "engines": {
     "node": ">=16.13.0"
+  },
+  "jest": {
+    "resetMocks": false
   },
   "name": "ui-refresh-test",
   "private": true,

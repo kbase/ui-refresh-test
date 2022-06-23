@@ -1,6 +1,3 @@
-import { FC } from 'react';
-import { useAppSelector } from '../../common/hooks';
-import classes from './TopBar.module.scss';
 import { FontAwesomeIcon as FAIcon } from '@fortawesome/react-fontawesome';
 import {
   faBars,
@@ -20,10 +17,15 @@ import {
   faUser,
   faWrench,
 } from '@fortawesome/free-solid-svg-icons';
-import { Dropdown } from '../../common/components';
+import { FC } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import logo from '../../common/assets/logo/46_square.png';
+import { Dropdown } from '../../common/components';
+import { useAppSelector } from '../../common/hooks';
+import { authUsername } from '../auth/authSlice';
+import { profileRealname } from '../profile/profileSlice';
+import classes from './TopBar.module.scss';
 
 export default function TopBar() {
   return (
@@ -48,6 +50,8 @@ export default function TopBar() {
 }
 
 const LoginMenu: FC = () => {
+  const username = useAppSelector(authUsername);
+  const realname = useAppSelector(profileRealname);
   const history = useHistory();
   return (
     <div className={classes.login_menu}>
@@ -61,8 +65,10 @@ const LoginMenu: FC = () => {
                 icon: undefined,
                 label: (
                   <div>
-                    <div>First Last</div>
-                    <div className={classes.login_menu_username}>username</div>
+                    <div>{realname}</div>
+                    <div className={classes.login_menu_username}>
+                      {username}
+                    </div>
                   </div>
                 ),
               },
@@ -71,7 +77,7 @@ const LoginMenu: FC = () => {
           {
             options: [
               {
-                value: '#your_profile',
+                value: '/profile',
                 icon: <FAIcon icon={faUser} />,
                 label: 'Your Profile',
               },

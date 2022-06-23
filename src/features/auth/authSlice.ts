@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import type { RootState } from '../../app/store';
 
 const AUTH_SERVICE = process.env.REACT_APP_AUTH_SERVICE_URL;
 
@@ -27,19 +28,26 @@ const initialState: AuthState = {
 export const authFromToken = createAsyncThunk(
   'auth/authFromToken',
   async (token: string) => {
-    const resp = await fetch(`${AUTH_SERVICE}/api/V2/token`, {
-      method: 'GET',
-      headers: {
-        Authorization: token || '',
-      },
-    });
-    if (!resp.ok) {
+    let resp: Response | undefined;
+    try {
+      resp = await fetch(`${AUTH_SERVICE}/api/V2/token`, {
+        method: 'GET',
+        headers: {
+          Authorization: token || '',
+        },
+      });
+    } catch (e) {
+      console.error('Authentication Error.'); // eslint-disable-line no-console
+      throw e;
+    }
+    if (typeof resp === 'undefined' || !resp.ok) {
       let errmsg = resp.statusText;
       try {
         const e = (await resp.json()).error;
         errmsg += `: ${e.message}`;
-      } catch {
-        // no-op
+      } catch (e) {
+        console.error('Error processing error message.'); // eslint-disable-line no-console
+        throw e;
       }
       throw new Error(`Failed to validate token: "${errmsg}"`);
     }
@@ -99,3 +107,8 @@ export const authSlice = createSlice({
 });
 
 export default authSlice.reducer;
+
+export const authUsername = (state: RootState) => {
+  if (!state.auth) return null;
+  return state.auth.username;
+};

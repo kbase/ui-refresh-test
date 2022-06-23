@@ -23,6 +23,6 @@ test('Auth page link works', () => {
   );
   const linkElement = screen.getByText(/Auth/i);
   linkElement.click();
-  const LoginStatusText = screen.getByText(/You are not logged in/i);
+  const LoginStatusText = screen.getByText(/kbase_session/);
   expect(LoginStatusText).toBeInTheDocument();
 });
