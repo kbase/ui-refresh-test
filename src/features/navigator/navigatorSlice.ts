@@ -25,7 +25,7 @@ export const narrativePreview = createAsyncThunk<
   };
   const { narrativeCache } = state.navigator;
 
-  if (upa in narrativeCache) {
+  if (upa in narrativeCache && !narrativeCache[upa].loading) {
     return narrativeCache[upa];
   }
 

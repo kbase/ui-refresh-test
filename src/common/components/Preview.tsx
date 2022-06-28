@@ -25,15 +25,19 @@ const Preview: FC<PreviewProps> = ({ narrative }) => {
   const { access_group, obj_id, version } = narrative;
   const upa: UPA = `${access_group}/${obj_id}/${version}`;
 
-  useEffect(() => {
-    dispatch(narrativePreview(upa));
-  }, [dispatch, upa]);
-
   const { cells, error, loading }: PreviewSelector = useAppSelector((state) => {
     const wsState = state.navigator.narrativeCache[upa];
-    const { error, loading } = wsState;
-    return { error, loading, cells: getFormattedCells(wsState.data) };
+    try {
+      const { error, loading } = wsState;
+      return { error, loading, cells: getFormattedCells(wsState.data) };
+    } catch {
+      return { cells: [], error: null, loading: false };
+    }
   });
+
+  useEffect(() => {
+    dispatch(narrativePreview(upa));
+  }, [upa, dispatch]);
 
   if (loading) {
     return (

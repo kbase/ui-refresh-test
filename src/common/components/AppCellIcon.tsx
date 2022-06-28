@@ -17,7 +17,7 @@ const AppCellIcon: FC<AppIconProps> = ({ appId, appTag }) => {
   );
   useEffect(() => {
     dispatch(appIcon({ appId, appTag }));
-  });
+  }, [dispatch, appId, appTag]);
 
   const loading = icon.icon === faSpinner;
 
