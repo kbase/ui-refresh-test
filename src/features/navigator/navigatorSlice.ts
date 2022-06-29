@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { getServiceClient } from '../../common/services';
 import { WorkspaceObject } from '../../common/models/WorkspaceObject';
 import { AuthState } from '../auth/authSlice';
+import { KBaseJsonRpcError } from '@kbase/narrative-utils';
 
 export type UPA = string;
 
@@ -30,14 +31,19 @@ export const narrativePreview = createAsyncThunk<
   }
 
   const client = getServiceClient('Workspace', state.auth.token);
-  const response = await client.call('get_objects2', [
-    { objects: { ref: upa } },
-  ]);
-  if (!response.ok) {
-    console.error(response.statusText); // eslint-disable-line no-console
-    throw new Error(`Couldn't load objects for workspace with ID "${upa}"`);
+  try {
+    const response = await client.call('get_objects2', [
+      { objects: [{ ref: upa }] },
+    ]);
+    return response.data[0].data;
+  } catch (e) {
+    if (e instanceof KBaseJsonRpcError) {
+      const { message } = e.data ?? e;
+      console.error(message); // eslint-disable-line no-console
+      throw new Error(message);
+    }
+    throw new Error(e as string);
   }
-  return response.data;
 });
 
 const initialState: NavigatorState = {

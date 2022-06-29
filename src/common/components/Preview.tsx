@@ -54,7 +54,7 @@ const Preview: FC<PreviewProps> = ({ narrative }) => {
     return (
       <div className={classes.error}>
         <div>An error happened while getting narrative info:</div>
-        <pre>error</pre>
+        <pre>{error}</pre>
       </div>
     );
   }
