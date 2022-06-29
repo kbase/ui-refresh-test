@@ -10,7 +10,7 @@ import { FontAwesomeIcon as FAIcon } from '@fortawesome/react-fontawesome';
 import { faCog } from '@fortawesome/free-solid-svg-icons';
 import { AppTag } from '../slices/iconSlice';
 
-interface PreviewProps {
+interface PreviewWrapperProps {
   narrative: NarrativeDoc;
 }
 
@@ -20,7 +20,7 @@ interface PreviewSelector {
   loading: boolean;
 }
 
-const Preview: FC<PreviewProps> = ({ narrative }) => {
+const PreviewWrapper: FC<PreviewWrapperProps> = ({ narrative }) => {
   const dispatch = useAppDispatch();
   const { access_group, obj_id, version } = narrative;
   const upa: UPA = `${access_group}/${obj_id}/${version}`;
@@ -59,8 +59,18 @@ const Preview: FC<PreviewProps> = ({ narrative }) => {
     );
   }
 
-  const maxLength = 16;
+  return <Preview maxLength={16} wsId={access_group} cells={cells} />;
+};
 
+export default PreviewWrapper;
+
+interface PreviewProps {
+  maxLength: number;
+  wsId: number;
+  cells: FormattedCell[];
+}
+
+export const Preview: FC<PreviewProps> = ({ maxLength, wsId, cells }) => {
   return (
     <div>
       <div>
@@ -74,10 +84,7 @@ const Preview: FC<PreviewProps> = ({ narrative }) => {
         </p>
       )}
       <p>
-        <a
-          className={classes.full_narrative_link}
-          href={`/narrative/${access_group}`}
-        >
+        <a className={classes.full_narrative_link} href={`/narrative/${wsId}`}>
           View the full narrative
         </a>
       </p>
@@ -121,5 +128,3 @@ const PreviewCell: FC<FormattedCell> = ({
     </div>
   );
 };
-
-export default Preview;

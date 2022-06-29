@@ -1,8 +1,6 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { NarrativeDoc } from '../../common/components/NarrativeList/NarrativeDoc';
-
-import Preview from '../../common/components/Preview';
+import { Preview } from '../../common/components/Preview';
 
 export default {
   title: 'Components/Preview',
@@ -16,38 +14,37 @@ const PreviewTemplate: ComponentStory<typeof Preview> = (args) => {
   return (
     <Router>
       <div style={{ height: '70px', width: '100%', position: 'relative' }}>
-        <Preview {...args}></Preview>
+        <Preview {...args} />
       </div>
     </Router>
   );
 };
-
-const fakeNarrative: NarrativeDoc = {
-  access_group: 67470,
-  obj_id: 1,
-  version: 6,
-  cells: [],
-  copied: false,
-  creation_date: '54382959084',
-  creator: 'me',
-  data_objects: [],
-  is_narratorial: true,
-  is_public: true,
-  is_temporary: false,
-  modified_at: 3,
-  narrative_title: 'dfsawd',
-  obj_name: 'jim',
-  obj_type_module: 'fda',
-  obj_type_version: 'fdsa',
-  owner: 'dad',
-  shared_users: [],
-  tags: [],
-  timestamp: 3,
-  total_cells: 3,
-};
-
 export const Default = PreviewTemplate.bind({});
 
 Default.args = {
-  narrative: fakeNarrative,
+  maxLength: 16,
+  wsId: 424242,
+  cells: [
+    {
+      metaName: 'an app cell',
+      cellType: 'app',
+      title: 'an incredible app!',
+      subtitle: 'It makes the PIs weep with joy.',
+      tag: 'release',
+    },
+    {
+      metaName: 'KBaseGenomes.Genome-1.1',
+      cellType: 'data',
+      title: 'The entire Genome of Sigourney Weaver',
+      subtitle: 'Top secret!! do not share outside of this org.',
+      tag: 'beta',
+    },
+    {
+      metaName: 'KBaseSamples.Sample',
+      cellType: 'data',
+      title: 'Xenomorph Gut Microbiome',
+      subtitle: 'Sampled by Weyland-Yutani © 2122',
+      tag: 'dev',
+    },
+  ],
 };
