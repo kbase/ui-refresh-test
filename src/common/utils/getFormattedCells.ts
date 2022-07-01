@@ -13,8 +13,10 @@ export function getFormattedCells(obj: WorkspaceObject): FormattedCell[] {
   if (!obj.cells) return [];
   return obj.cells.map((cell: NarrativeCell) => {
     const metadata = cell.metadata?.kbase || {};
-    const title = metadata?.attributes?.title;
-    const subtitle = metadata?.attributes?.subtitle || cell.source;
+    const title = metadata?.attributes?.title ?? 'KBase Object';
+    const subtitle =
+      (metadata?.attributes?.subtitle || cell.source) ??
+      'Unrecognized KBase Object';
     const cellType = metadata.type ? metadata.type : cell.cell_type;
     const info = metadata?.dataCell?.objectInfo || {};
     let metaName, tag;

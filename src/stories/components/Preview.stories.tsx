@@ -1,6 +1,7 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Preview } from '../../common/components/Preview';
+import { getFormattedCells } from '../../common/utils/getFormattedCells';
 
 export default {
   title: 'Components/Preview',
@@ -46,5 +47,7 @@ Default.args = {
       subtitle: 'Sampled by Weyland-Yutani © 2122',
       tag: 'dev',
     },
+    // default icon with nothing in it
+    getFormattedCells({ cells: [{}] })[0],
   ],
 };

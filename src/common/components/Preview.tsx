@@ -9,6 +9,7 @@ import classes from './Preview.module.scss';
 import { FontAwesomeIcon as FAIcon } from '@fortawesome/react-fontawesome';
 import { faCog } from '@fortawesome/free-solid-svg-icons';
 import { AppTag } from '../slices/iconSlice';
+import DefaultIcon from './DefaultIcon';
 
 interface PreviewWrapperProps {
   narrative: NarrativeDoc;
@@ -111,8 +112,7 @@ const PreviewCell: FC<FormattedCell> = ({
       case 'data':
         return <TypeIcon objType={metaName ?? ''} />;
       default:
-        // TODO: create defaultIcon component
-        return <></>;
+        return <DefaultIcon cellType={cellType ?? ''} />;
     }
   }
   if (subtitle?.startsWith(title as string)) {
