@@ -5,14 +5,23 @@ import icons from '../common/slices/iconSlice';
 import layout from '../features/layout/layoutSlice';
 import profile from '../features/profile/profileSlice';
 import navigator from '../features/navigator/navigatorSlice';
+import { wsObjectApi } from '../common/api';
 
-const createStore = () => {
-  const config = {
+const createStore = () =>
+  configureStore({
     devTools: true,
-    reducer: { auth, count, icons, layout, profile, navigator },
-  };
-  return configureStore(config);
-};
+    reducer: {
+      count,
+      auth,
+      layout,
+      icons,
+      profile,
+      navigator,
+      [wsObjectApi.reducerPath]: wsObjectApi.reducer,
+    },
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware().concat(wsObjectApi.middleware),
+  });
 
 export const store = createStore();
 
