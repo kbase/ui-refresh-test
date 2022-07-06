@@ -1,7 +1,7 @@
 import classes from './App.module.scss';
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { useAppDispatch } from '../common/hooks';
+import { useAppDispatch, useAppSelector } from '../common/hooks';
 import { useEffect } from 'react';
 import { authFromToken } from '../features/auth/authSlice';
 import { setEnvironment } from '../features/layout/layoutSlice';
@@ -16,6 +16,10 @@ import Count from '../features/count/Counter';
 import Legacy from '../features/legacy/Legacy';
 import Auth from '../features/auth/Auth';
 import Status from '../features/status/Status';
+
+import { PreviewSelector } from '../common/components/Preview';
+import { getFormattedCells } from '../common/utils/getFormattedCells';
+import { narrativePreview } from '../features/navigator/navigatorSlice';
 
 export default function App() {
   const dispatch = useAppDispatch();
@@ -49,13 +53,16 @@ export default function App() {
               <Count />
             </Route>
             <Route path="/auth">
-              <Auth />
+              <><Auth /><TestComponent /></>;
             </Route>
             <Route path="/status">
               <Status />
             </Route>
             <Route exact path="/">
               <Navigator />
+            </Route>
+            <Route path="/test_rtk">
+              <TestComponent></TestComponent>
             </Route>
             <Route path="*">
               <PageNotFound />
@@ -65,4 +72,30 @@ export default function App() {
       </div>
     </Router>
   );
+}
+
+const TestComponent = () => {
+  const dispatch = useAppDispatch();
+  const upa = '67470/1/6'
+
+  const { cells, error, loading }: PreviewSelector = useAppSelector((state) => {
+    const wsState = state.navigator.narrativeCache[upa];
+    try {
+      const { error, loading } = wsState;
+      return { error, loading, cells: getFormattedCells(wsState.data) };
+    } catch {
+      return { cells: [], error: null, loading: false };
+    }
+})
+useEffect(() => {
+  dispatch(narrativePreview(upa));
+}, [upa, dispatch]);
+
+  if (loading) {
+    return <>LOADING!!!!</>;
+  }
+  if (error) {
+    return <>{JSON.stringify(error)}</>;
+  }
+  return <>{JSON.stringify(cells)}</>;
 }

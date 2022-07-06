@@ -15,7 +15,7 @@ interface PreviewWrapperProps {
   narrative: NarrativeDoc;
 }
 
-interface PreviewSelector {
+export interface PreviewSelector {
   cells?: FormattedCell[];
   error: string | null;
   loading: boolean;

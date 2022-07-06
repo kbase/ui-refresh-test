@@ -4,10 +4,20 @@ import auth from '../features/auth/authSlice';
 import layout from '../features/layout/layoutSlice';
 import icons from '../common/slices/iconSlice';
 import navigator from '../features/navigator/navigatorSlice';
+import { wsObjectApi } from '../common/api';
 
 const createStore = () =>
   configureStore({
-    reducer: { count, auth, layout, icons, navigator },
+    reducer: {
+      count,
+      auth,
+      layout,
+      icons,
+      navigator,
+      [wsObjectApi.reducerPath]: wsObjectApi.reducer,
+    },
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware().concat(wsObjectApi.middleware),
   });
 
 export const store = createStore();

@@ -3,6 +3,7 @@ import { getServiceClient } from '../../common/services';
 import { WorkspaceObject } from '../../common/models/WorkspaceObject';
 import { AuthState } from '../auth/authSlice';
 import { KBaseJsonRpcError } from '@kbase/narrative-utils';
+import { useGetwsObjectByNameQuery } from '../../common/api';
 
 export type UPA = string;
 
@@ -15,36 +16,47 @@ interface WorkspaceState {
   loading: boolean;
 }
 
-export const narrativePreview = createAsyncThunk<
-  WorkspaceObject,
-  UPA,
-  { rejectValue: string }
->('narrativePreview', async (upa, thunkAPI) => {
+// export const narrativePreview = createAsyncThunk<
+//   WorkspaceObject,
+//   UPA,
+//   { rejectValue: string }
+// >('narrativePreview', async (upa, thunkAPI) => {
+//   const state = thunkAPI.getState() as {
+//     navigator: NavigatorState;
+//     auth: AuthState;
+//   };
+//   const { narrativeCache } = state.navigator;
+
+//   if (upa in narrativeCache && !narrativeCache[upa].loading) {
+//     return narrativeCache[upa];
+//   }
+
+//   const client = getServiceClient('Workspace', state.auth.token);
+//   try {
+//     const response = await client.call('get_objects2', [
+//       { objects: [{ ref: upa }] },
+//     ]);
+//     return response.data[0].data;
+//   } catch (e) {
+//     if (e instanceof KBaseJsonRpcError) {
+//       const { message } = e.data ?? e;
+//       console.error(message); // eslint-disable-line no-console
+//       throw new Error(message);
+//     }
+//     throw new Error(e as string);
+//   }
+// });
+
+export const narrativePreview = createAsyncThunk<any, any, any>(
+  'narrativePreview',
+  async (upa, thunkAPI) => {
   const state = thunkAPI.getState() as {
-    navigator: NavigatorState;
-    auth: AuthState;
-  };
-  const { narrativeCache } = state.navigator;
-
-  if (upa in narrativeCache && !narrativeCache[upa].loading) {
-    return narrativeCache[upa];
+      navigator: NavigatorState;
+      auth: AuthState;
+    };
+    /** the magic goes here */
   }
-
-  const client = getServiceClient('Workspace', state.auth.token);
-  try {
-    const response = await client.call('get_objects2', [
-      { objects: [{ ref: upa }] },
-    ]);
-    return response.data[0].data;
-  } catch (e) {
-    if (e instanceof KBaseJsonRpcError) {
-      const { message } = e.data ?? e;
-      console.error(message); // eslint-disable-line no-console
-      throw new Error(message);
-    }
-    throw new Error(e as string);
-  }
-});
+);
 
 const initialState: NavigatorState = {
   narrativeCache: {},
@@ -70,7 +82,7 @@ export const navigatorSlice = createSlice({
         state.narrativeCache = {
           ...state.narrativeCache,
           [action.meta.arg]: {
-            error: action.error.message ?? null,
+            error: (action.error as any).message ?? null,
             data: {},
             loading: false,
           },
