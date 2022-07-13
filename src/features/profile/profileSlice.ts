@@ -127,6 +127,7 @@ export const profileSlice = createSlice({
         state.usernameSelected = user.username;
         const cache: KBaseProfileResponseCache = {
           [state.usernameSelected]: profileCache,
+          ...state.cache,
         };
         state.cache = cache;
         state.pending = false;

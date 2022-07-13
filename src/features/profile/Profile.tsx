@@ -19,6 +19,15 @@ import {
 } from './profileSlice';
 import classes from './Profile.module.scss';
 
+/*
+ * The following components are stubs due to be written in the future.
+ * NarrativesView
+ * ProfileInfobox
+ * ProfileNarrativesMessage
+ * ProfileResume
+ * ProfileView
+ */
+
 export const ProfileNarrativesMessage: FC<{
   realname: string;
   yours: boolean;
@@ -50,8 +59,6 @@ export const NarrativesView: FC<{ realname: string; yours: boolean }> = ({
         itemsRemaining={0}
         hasMoreItems={false}
         loading={false}
-        onLoadMoreItems={() => {}} //eslint-disable-line @typescript-eslint/no-empty-function
-        onSelectItem={() => {}} //eslint-disable-line @typescript-eslint/no-empty-function
         showVersionDropdown
       />
     </div>
@@ -162,7 +169,7 @@ export const ProfileWrapper: FC = () => {
   if (!profile) {
     return <>Loading user profile.</>;
   }
-  const profileNames = cachedProfiles[loadUsername].user;
+  const profileNames = profile.user;
   const realname = profileNames.realname;
   const whoseProfile = viewMine ? 'My ' : `${realname}'s `;
   const pageTitle = realname ? `${whoseProfile} Profile` : '';
