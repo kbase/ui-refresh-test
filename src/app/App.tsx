@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 import { authFromToken } from '../features/auth/authSlice';
 import { setEnvironment } from '../features/layout/layoutSlice';
 import { getCookie } from '../common/cookie';
-
+import { useGetwsObjectByNameQuery } from '../common/api';
 import LeftNavBar from '../features/layout/LeftNavBar';
 import PageNotFound from '../features/layout/PageNotFound';
 import TopBar from '../features/layout/TopBar';
@@ -76,26 +76,32 @@ export default function App() {
 
 const TestComponent = () => {
   const dispatch = useAppDispatch();
-  const upa = '67470/1/6'
+  // const upa = '67470/1/';
+  // const upa = `67470/1/${Math.ceil(Math.random() * 6)}`;
+  const upa = `67470/1/6`;
+  console.log('MAGIC RANDOM UPA', upa);
+  const { isError, isFetching, isSuccess, data, isLoading, refetch } = useGetwsObjectByNameQuery(upa);
+  console.log("QUERY");
+  console.log('data', data);
 
-  const { cells, error, loading }: PreviewSelector = useAppSelector((state) => {
-    const wsState = state.navigator.narrativeCache[upa];
-    try {
-      const { error, loading } = wsState;
-      return { error, loading, cells: getFormattedCells(wsState.data) };
-    } catch {
-      return { cells: [], error: null, loading: false };
-    }
-})
-useEffect(() => {
-  dispatch(narrativePreview(upa));
-}, [upa, dispatch]);
+  // const { cells, error, loading }: PreviewSelector = useAppSelector((state) => {
+  //   const wsState = state.navigator.narrativeCache[upa];
+  //   try {
+  //     const { error, loading } = wsState;
+  //     return { error, loading, cells: getFormattedCells(wsState.data) };
+  //   } catch {
+  //     return { cells: [], error: null, loading: false };
+  //   }
+  // });
+  // useEffect(() => {
+    // dispatch(narrativePreview(upa));
+  // }, [upa, dispatch, data]);
 
-  if (loading) {
+  if (isFetching || isLoading) {
     return <>LOADING!!!!</>;
   }
-  if (error) {
-    return <>{JSON.stringify(error)}</>;
+  if (isError) {
+    return <>THIS IS BAD!!!! {JSON.stringify(data)}</>;
   }
-  return <>{JSON.stringify(cells)}</>;
+  return <>{JSON.stringify(data)}</>;
 }
