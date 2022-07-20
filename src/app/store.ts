@@ -6,6 +6,7 @@ import layout from '../features/layout/layoutSlice';
 import profile from '../features/profile/profileSlice';
 import navigator from '../features/navigator/navigatorSlice';
 import { wsObjectApi } from '../common/api';
+import { serviceWizardApi } from '../common/api';
 
 const createStore = () =>
   configureStore({
@@ -18,9 +19,12 @@ const createStore = () =>
       profile,
       navigator,
       [wsObjectApi.reducerPath]: wsObjectApi.reducer,
+      [serviceWizardApi.reducerPath]: serviceWizardApi.reducer,
     },
     middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat(wsObjectApi.middleware),
+      getDefaultMiddleware()
+        .concat(wsObjectApi.middleware)
+        .concat(serviceWizardApi.middleware),
   });
 
 export const store = createStore();

@@ -6,9 +6,11 @@ import { FC, useEffect } from 'react';
 import { authFromToken } from '../features/auth/authSlice';
 import { setEnvironment } from '../features/layout/layoutSlice';
 import { getCookie } from '../common/cookie';
-
 import Routes from './Routes';
-import { useGetwsObjectByNameQuery } from '../common/api';
+import {
+  useGetwsObjectByNameQuery,
+  useGetServiceUrlQuery,
+} from '../common/api';
 import LeftNavBar from '../features/layout/LeftNavBar';
 import TopBar from '../features/layout/TopBar';
 
@@ -57,11 +59,15 @@ const TestComponent = () => {
   // const upa = '67470/1/';
   // const upa = `67470/1/${Math.ceil(Math.random() * 6)}`;
   const upa = `67470/1/6`;
-  console.log('MAGIC RANDOM UPA', upa);
+  // console.log('MAGIC RANDOM UPA', upa);
   const { isError, isFetching, isSuccess, data, isLoading, refetch } =
     useGetwsObjectByNameQuery(upa);
-  console.log('QUERY');
-  console.log('data', data);
+  const urlData = useGetServiceUrlQuery({
+    module: 'HTMLFileSetServ',
+    version: 'release',
+  });
+  // console.log("QUERY");
+  // console.log('data', data);
 
   // const { cells, error, loading }: PreviewSelector = useAppSelector((state) => {
   //   const wsState = state.navigator.narrativeCache[upa];
@@ -76,11 +82,11 @@ const TestComponent = () => {
   // dispatch(narrativePreview(upa));
   // }, [upa, dispatch, data]);
 
-  if (isFetching || isLoading) {
+  if (urlData.isFetching || urlData.isLoading) {
     return <>LOADING!!!!</>;
   }
-  if (isError) {
-    return <>THIS IS BAD!!!! {JSON.stringify(data)}</>;
+  if (urlData.isError) {
+    return <>THIS IS BAD!!!! {JSON.stringify(urlData)}</>;
   }
-  return <>{JSON.stringify(data)}</>;
+  return <>{JSON.stringify(urlData)}</>;
 };
