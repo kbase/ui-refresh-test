@@ -6,10 +6,7 @@ import { useEffect } from 'react';
 import { authFromToken } from '../features/auth/authSlice';
 import { setEnvironment } from '../features/layout/layoutSlice';
 import { getCookie } from '../common/cookie';
-import {
-  useGetwsObjectByNameQuery,
-  useGetServiceUrlQuery,
-} from '../common/api';
+import { useGetwsObjectByNameQuery, useGetStatusQuery } from '../common/api';
 import LeftNavBar from '../features/layout/LeftNavBar';
 import PageNotFound from '../features/layout/PageNotFound';
 import TopBar from '../features/layout/TopBar';
@@ -56,7 +53,11 @@ export default function App() {
               <Count />
             </Route>
             <Route path="/auth">
-              <><Auth /><TestComponent /></>;
+              <>
+                <Auth />
+                <TestComponent />
+              </>
+              ;
             </Route>
             <Route path="/status">
               <Status />
@@ -81,13 +82,16 @@ const TestComponent = () => {
   const dispatch = useAppDispatch();
   // const upa = '67470/1/';
   // const upa = `67470/1/${Math.ceil(Math.random() * 6)}`;
-  const upa = `67470/1/6` ;
+  const upa = `67470/1/6`;
   // console.log('MAGIC RANDOM UPA', upa);
-  const { isError, isFetching, isSuccess, data, isLoading, refetch } = useGetwsObjectByNameQuery(upa);
-  const urlData = useGetServiceUrlQuery({
-    module: 'HTMLFileSetServ',
-    version: 'release',
-  });
+  const { isError, isFetching, isSuccess, data, isLoading, refetch } =
+    useGetwsObjectByNameQuery(upa);
+  const urlData = useGetStatusQuery(undefined);
+  const refetch2 = urlData.refetch;
+  useEffect(() => {
+    const i = setInterval(() => refetch2(), 2000);
+    return () => clearInterval(i);
+  }, [refetch2]);
   // console.log("QUERY");
   // console.log('data', data);
 
@@ -101,7 +105,7 @@ const TestComponent = () => {
   //   }
   // });
   // useEffect(() => {
-    // dispatch(narrativePreview(upa));
+  // dispatch(narrativePreview(upa));
   // }, [upa, dispatch, data]);
 
   if (urlData.isFetching || urlData.isLoading) {
@@ -111,4 +115,4 @@ const TestComponent = () => {
     return <>THIS IS BAD!!!! {JSON.stringify(urlData)}</>;
   }
   return <>{JSON.stringify(urlData)}</>;
-}
+};
