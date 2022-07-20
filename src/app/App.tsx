@@ -7,10 +7,7 @@ import { authFromToken } from '../features/auth/authSlice';
 import { setEnvironment } from '../features/layout/layoutSlice';
 import { getCookie } from '../common/cookie';
 import Routes from './Routes';
-import {
-  useGetwsObjectByNameQuery,
-  useGetServiceUrlQuery,
-} from '../common/api';
+import { useGetwsObjectByNameQuery, useGetStatusQuery } from '../common/api';
 import LeftNavBar from '../features/layout/LeftNavBar';
 import TopBar from '../features/layout/TopBar';
 
@@ -62,10 +59,12 @@ const TestComponent = () => {
   // console.log('MAGIC RANDOM UPA', upa);
   const { isError, isFetching, isSuccess, data, isLoading, refetch } =
     useGetwsObjectByNameQuery(upa);
-  const urlData = useGetServiceUrlQuery({
-    module: 'HTMLFileSetServ',
-    version: 'release',
-  });
+  const urlData = useGetStatusQuery(undefined);
+  const refetch2 = urlData.refetch;
+  useEffect(() => {
+    const i = setInterval(() => refetch2(), 2000);
+    return () => clearInterval(i);
+  }, [refetch2]);
   // console.log("QUERY");
   // console.log('data', data);
 
