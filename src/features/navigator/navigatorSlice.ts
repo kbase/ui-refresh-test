@@ -3,7 +3,6 @@ import { getServiceClient } from '../../common/services';
 import { WorkspaceObject } from '../../common/models/WorkspaceObject';
 import { AuthState } from '../auth/authSlice';
 import { KBaseJsonRpcError } from '@kbase/narrative-utils';
-import { useGetwsObjectByNameQuery } from '../../common/api';
 
 export type UPA = string;
 
@@ -50,7 +49,7 @@ interface WorkspaceState {
 export const narrativePreview = createAsyncThunk<any, any, any>(
   'narrativePreview',
   async (upa, thunkAPI) => {
-  const state = thunkAPI.getState() as {
+    const state = thunkAPI.getState() as {
       navigator: NavigatorState;
       auth: AuthState;
     };

@@ -7,7 +7,8 @@ import { authFromToken } from '../features/auth/authSlice';
 import { setEnvironment } from '../features/layout/layoutSlice';
 import { getCookie } from '../common/cookie';
 import Routes from './Routes';
-import { useGetwsObjectByNameQuery, useGetStatusQuery } from '../common/api';
+import { useStatusQuery } from '../common/api/htmlFileSetServApi';
+import { useGetwsObjectByNameQuery } from '../common/api/wsObjectApi';
 import LeftNavBar from '../features/layout/LeftNavBar';
 import TopBar from '../features/layout/TopBar';
 
@@ -59,10 +60,10 @@ const TestComponent = () => {
   // console.log('MAGIC RANDOM UPA', upa);
   const { isError, isFetching, isSuccess, data, isLoading, refetch } =
     useGetwsObjectByNameQuery(upa);
-  const urlData = useGetStatusQuery(undefined);
+  const urlData = useStatusQuery();
   const refetch2 = urlData.refetch;
   useEffect(() => {
-    const i = setInterval(() => refetch2(), 2000);
+    const i = setInterval(() => refetch2(), 10000);
     return () => clearInterval(i);
   }, [refetch2]);
   // console.log("QUERY");

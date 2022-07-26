@@ -5,11 +5,8 @@ import icons from '../common/slices/iconSlice';
 import layout from '../features/layout/layoutSlice';
 import profile from '../features/profile/profileSlice';
 import navigator from '../features/navigator/navigatorSlice';
-import {
-  wsObjectApi,
-  serviceWizardApi,
-  HTMLFileSetServAPI,
-} from '../common/api';
+
+import { apiMiddleware, apiReducers } from '../common/api';
 
 const createStore = () =>
   configureStore({
@@ -21,15 +18,10 @@ const createStore = () =>
       icons,
       profile,
       navigator,
-      [wsObjectApi.reducerPath]: wsObjectApi.reducer,
-      [serviceWizardApi.reducerPath]: serviceWizardApi.reducer,
-      [HTMLFileSetServAPI.reducerPath]: HTMLFileSetServAPI.reducer,
+      ...apiReducers,
     },
     middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware()
-        .concat(wsObjectApi.middleware)
-        .concat(serviceWizardApi.middleware)
-        .concat(HTMLFileSetServAPI.middleware),
+      getDefaultMiddleware().concat(...apiMiddleware),
   });
 
 export const store = createStore();
