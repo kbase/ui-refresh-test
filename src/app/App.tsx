@@ -1,23 +1,16 @@
 import classes from './App.module.scss';
 
 import { BrowserRouter as Router } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../common/hooks';
+import { useAppDispatch } from '../common/hooks';
 import { FC, useEffect } from 'react';
 import { authFromToken } from '../features/auth/authSlice';
 import { setEnvironment } from '../features/layout/layoutSlice';
 import { getCookie } from '../common/cookie';
+
 import Routes from './Routes';
-import {
-  useStatusQuery,
-  useUserProfileQuery,
-} from '../common/api/userProfileApi';
-import { useGetwsObjectByNameQuery } from '../common/api/wsObjectApi';
 import LeftNavBar from '../features/layout/LeftNavBar';
 import TopBar from '../features/layout/TopBar';
 
-import { PreviewSelector } from '../common/components/Preview';
-import { getFormattedCells } from '../common/utils/getFormattedCells';
-import { narrativePreview } from '../features/navigator/navigatorSlice';
 const UnauthenticatedView: FC = () => (
   <>
     Set your <var>kbase_session</var> cookie to your login token.
@@ -54,43 +47,3 @@ export default function App() {
     </Router>
   );
 }
-
-const TestComponent = () => {
-  const dispatch = useAppDispatch();
-  // const upa = '67470/1/';
-  // const upa = `67470/1/${Math.ceil(Math.random() * 6)}`;
-  const upa = `67470/1/6`;
-  // console.log('MAGIC RANDOM UPA', upa);
-  const { isError, isFetching, isSuccess, data, isLoading, refetch } =
-    useGetwsObjectByNameQuery(upa);
-  const urlData = useStatusQuery();
-  const userData = useUserProfileQuery(['dlyon']);
-  const refetch2 = urlData.refetch;
-  useEffect(() => {
-    const i = setInterval(() => refetch2(), 10000);
-    return () => clearInterval(i);
-  }, [refetch2]);
-  // console.log("QUERY");
-  // console.log('data', data);
-
-  // const { cells, error, loading }: PreviewSelector = useAppSelector((state) => {
-  //   const wsState = state.navigator.narrativeCache[upa];
-  //   try {
-  //     const { error, loading } = wsState;
-  //     return { error, loading, cells: getFormattedCells(wsState.data) };
-  //   } catch {
-  //     return { cells: [], error: null, loading: false };
-  //   }
-  // });
-  // useEffect(() => {
-  // dispatch(narrativePreview(upa));
-  // }, [upa, dispatch, data]);
-
-  if (userData.isFetching || userData.isLoading) {
-    return <>LOADING!!!!</>;
-  }
-  if (userData.isError) {
-    return <>THIS IS BAD!!!! {JSON.stringify(userData)}</>;
-  }
-  return <>{JSON.stringify(userData)}</>;
-};
