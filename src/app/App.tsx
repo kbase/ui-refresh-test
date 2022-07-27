@@ -6,7 +6,10 @@ import { useEffect } from 'react';
 import { authFromToken } from '../features/auth/authSlice';
 import { setEnvironment } from '../features/layout/layoutSlice';
 import { getCookie } from '../common/cookie';
-import { useStatusQuery } from '../common/api/htmlFileSetServApi';
+import {
+  useStatusQuery,
+  useUserProfileQuery,
+} from '../common/api/userProfileApi';
 import { useGetwsObjectByNameQuery } from '../common/api/wsObjectApi';
 import LeftNavBar from '../features/layout/LeftNavBar';
 import PageNotFound from '../features/layout/PageNotFound';
@@ -88,6 +91,7 @@ const TestComponent = () => {
   const { isError, isFetching, isSuccess, data, isLoading, refetch } =
     useGetwsObjectByNameQuery(upa);
   const urlData = useStatusQuery();
+  const userData = useUserProfileQuery(['dlyon']);
   const refetch2 = urlData.refetch;
   useEffect(() => {
     const i = setInterval(() => refetch2(), 10000);
@@ -109,11 +113,11 @@ const TestComponent = () => {
   // dispatch(narrativePreview(upa));
   // }, [upa, dispatch, data]);
 
-  if (urlData.isFetching || urlData.isLoading) {
+  if (userData.isFetching || userData.isLoading) {
     return <>LOADING!!!!</>;
   }
-  if (urlData.isError) {
-    return <>THIS IS BAD!!!! {JSON.stringify(urlData)}</>;
+  if (userData.isError) {
+    return <>THIS IS BAD!!!! {JSON.stringify(userData)}</>;
   }
-  return <>{JSON.stringify(urlData)}</>;
+  return <>{JSON.stringify(userData)}</>;
 };
