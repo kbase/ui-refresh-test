@@ -1,9 +1,15 @@
 import { wsObjectApi } from './wsObjectApi';
 import { serviceWizardApi } from './serviceWizardApi';
 import { htmlFileSetServApi } from './htmlFileSetServApi';
+import { userProfileApi } from './userProfileApi';
 
 // List APIs to be included in the webapp
-const apiList = [wsObjectApi, serviceWizardApi, htmlFileSetServApi];
+const apiList = [
+  wsObjectApi,
+  serviceWizardApi,
+  htmlFileSetServApi,
+  userProfileApi,
+];
 
 // Export collections of api reducers/middlewares to be used in createStore
 export const apiReducers = collectReducers(apiList);
@@ -16,10 +22,12 @@ interface AnyAPI {
   middleware: unknown;
 }
 
+// use function keyword for hoisting
 function collectMiddleware<T extends AnyAPI[]>(apiList: T) {
   return apiList.map<T[number]['middleware']>((api) => api.middleware);
 }
 
+// use function keyword for hoisting
 function collectReducers<T extends AnyAPI[]>(apiList: T) {
   const reducerRecord = apiList.reduce<
     Record<AnyAPI['reducerPath'], AnyAPI['reducer']>
