@@ -8,7 +8,7 @@ import { setEnvironment } from '../features/layout/layoutSlice';
 import { getCookie } from '../common/cookie';
 import {
   useStatusQuery,
-  useUserProfileQuery,
+  useGetUserProfileQuery,
 } from '../common/api/userProfileApi';
 import { useGetwsObjectByNameQuery } from '../common/api/wsObjectApi';
 import LeftNavBar from '../features/layout/LeftNavBar';
@@ -57,20 +57,13 @@ export default function App() {
               <Count />
             </Route>
             <Route path="/auth">
-              <>
-                <Auth />
-                <TestComponent />
-              </>
-              ;
+              <Auth />
             </Route>
             <Route path="/status">
               <Status />
             </Route>
             <Route exact path="/">
               <Navigator />
-            </Route>
-            <Route path="/test_rtk">
-              <TestComponent></TestComponent>
             </Route>
             <Route path="*">
               <PageNotFound />
@@ -83,23 +76,21 @@ export default function App() {
 }
 
 const TestComponent = () => {
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
   // const upa = '67470/1/';
   // const upa = `67470/1/${Math.ceil(Math.random() * 6)}`;
-  const upa = `67470/1/6`;
+  // const upa = `67470/1/6`;
   // console.log('MAGIC RANDOM UPA', upa);
-  const { isError, isFetching, isSuccess, data, isLoading, refetch } =
-    useGetwsObjectByNameQuery(upa);
-  const urlData = useStatusQuery();
-  const userData = useUserProfileQuery(['dlyon']);
-  const refetch2 = urlData.refetch;
-  useEffect(() => {
-    const i = setInterval(() => refetch2(), 10000);
-    return () => clearInterval(i);
-  }, [refetch2]);
+  // const { isError, isFetching, isSuccess, data, isLoading, refetch } =
+  // useGetwsObjectByNameQuery(upa);
+  // const urlData = useStatusQuery();
+  // const refetch2 = urlData.refetch;
+  // useEffect(() => {
+  //   const i = setInterval(() => refetch2(), 10000);
+  //   return () => clearInterval(i);
+  // }, [refetch2]);
   // console.log("QUERY");
   // console.log('data', data);
-
   // const { cells, error, loading }: PreviewSelector = useAppSelector((state) => {
   //   const wsState = state.navigator.narrativeCache[upa];
   //   try {
@@ -112,12 +103,4 @@ const TestComponent = () => {
   // useEffect(() => {
   // dispatch(narrativePreview(upa));
   // }, [upa, dispatch, data]);
-
-  if (userData.isFetching || userData.isLoading) {
-    return <>LOADING!!!!</>;
-  }
-  if (userData.isError) {
-    return <>THIS IS BAD!!!! {JSON.stringify(userData)}</>;
-  }
-  return <>{JSON.stringify(userData)}</>;
 };

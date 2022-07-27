@@ -1,4 +1,8 @@
 import { useEffect, useState } from 'react';
+import {
+  useGetUserProfileQuery,
+  useSetUserProfileMutation,
+} from '../../common/api/userProfileApi';
 import { Button } from '../../common/components';
 import {
   useAppSelector,
@@ -7,6 +11,8 @@ import {
 } from '../../common/hooks';
 import { getServiceClient } from '../../common/services';
 import { authFromToken, revokeCurrentToken } from './authSlice';
+import { faCheck, faX, faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon as FAIcon } from '@fortawesome/react-fontawesome';
 
 export default function Auth() {
   usePageTitle('Authentication');
@@ -32,6 +38,9 @@ export default function Auth() {
       </p>
       {pending ? <p>Please wait...</p> : token ? <LogoutForm /> : <AuthForm />}
       {error ? <span style={{ color: 'red' }}>{error}</span> : null}
+      <p>
+        <ProfileTest />
+      </p>
     </div>
   );
 }
@@ -66,6 +75,49 @@ const LogoutForm = () => {
       <Button onClick={() => dispatch(revokeCurrentToken())}>
         Logout of KBase
       </Button>
+    </div>
+  );
+};
+
+const ProfileTest = () => {
+  const profile = useGetUserProfileQuery({ usernames: ['dlyon'] });
+  const [updateProfile, updateProfileResult] = useSetUserProfileMutation();
+  const [nameText, setNameText] = useState('');
+
+  const changeName = async () => {
+    const oldProfile = profile.data?.[0][0];
+    const newProfile: typeof oldProfile = JSON.parse(
+      JSON.stringify(profile.data?.[0][0])
+    );
+    if (newProfile === undefined) return;
+    if (nameText.trim() === '') return;
+    newProfile.user.realname = nameText.trim();
+    updateProfile({ profile: newProfile });
+  };
+
+  return (
+    <div style={{ maxWidth: '10em' }}>
+      Profile:
+      {profile.isSuccess ? (
+        JSON.stringify(profile.data?.[0][0])
+      ) : profile.isError ? (
+        JSON.stringify(profile.error)
+      ) : profile.isLoading ? (
+        <FAIcon icon={faSpinner} spin />
+      ) : (
+        ' '
+      )}
+      <br />
+      <input
+        type="text"
+        placeholder="Change Username"
+        value={nameText}
+        onInput={(e) => setNameText(e.currentTarget.value)}
+      />
+      <button onClick={() => changeName()}>Update</button>
+      {updateProfileResult.isLoading ? <FAIcon icon={faSpinner} spin /> : null}
+      {updateProfileResult.isSuccess ? <FAIcon icon={faCheck} /> : null}
+      {updateProfileResult.isError ? <FAIcon icon={faX} /> : null}
     </div>
   );
 };
