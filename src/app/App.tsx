@@ -10,6 +10,7 @@ import { getCookie } from '../common/cookie';
 import Routes from './Routes';
 import LeftNavBar from '../features/layout/LeftNavBar';
 import TopBar from '../features/layout/TopBar';
+
 const UnauthenticatedView: FC = () => (
   <>
     Set your <var>kbase_session</var> cookie to your login token.

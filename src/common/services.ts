@@ -6,12 +6,13 @@ const BASE_URI = `https://${ENV === 'PROD' ? '' : `${ENV}.`}kbase.us`;
 export const URLS = {
   UserProfile: `${BASE_URI}/services/user_profile/rpc`,
   NarrativeMethodStore: `${BASE_URI}/services/narrative_method_store/rpc`,
+  Workspace: `${BASE_URI}/services/ws`,
 } as const;
 
 export const getServiceClient = (
   service: keyof typeof URLS,
   token?: string
-) => {
+): KBaseServiceClient => {
   return new KBaseServiceClient({
     module: service,
     url: URLS[service],

@@ -13,7 +13,7 @@ interface TokenInfo {
   cachefor: number;
 }
 
-interface AuthState {
+export interface AuthState {
   token?: string;
   username?: string;
   error?: string;
